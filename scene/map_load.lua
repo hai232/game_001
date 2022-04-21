@@ -11,7 +11,7 @@ local map = require( "game.map" )
 local results
 local data = gamedata.loadData()
 local mapLocation = {}
-mapLocation = data.map or {x = 1 , y = 1}
+mapLocation = data.player.map or {x = 1 , y = 1}
 
 -- Create the widget
 

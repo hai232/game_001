@@ -7,7 +7,7 @@ local controler = require('game.function')
 local bot = require('game.bot')
 local playerControler = require('game.player')
 local vjoy = require( "game.joy" )
-local bulletHandler = require( "game.bullet" )
+local attackHandler = require( "game.attack" )
 local weapon = require('game.weapon')
 local scene = composer.newScene()
 -- -----------------------------------------------------------------------------------
@@ -65,7 +65,7 @@ end
 
 playerControler.attack = function(angle)
     local index = #bullet + 1 
-    table.insert(bullet,bulletHandler.attack(player , angle , tostring(index) ,player.weapon.name));
+    table.insert(bullet,attackHandler.attack(player , angle , tostring(index) ,player.weapon.name));
     gameView:insert(bullet[index])
     bulletUpdate()
 end
@@ -84,7 +84,7 @@ end
 local function botControler(event)
     if(event.phase == 'attack') then
         local index = #bullet + 1 
-        table.insert(bullet,bulletHandler.attack(event.target , angle , tostring(index) ,player.weapon.name));
+        table.insert(bullet,attackHandler.attack(event.target , angle , tostring(index) ,player.weapon.name));
         gameView:insert(bullet[index])
     end
 end
@@ -191,8 +191,9 @@ end
 
 local function saveGame( event )
     gamedata.saveData({
-        player = {x = player.x , y = player.y} ,
-        map = {x = 2 , y = 1}
+        player = {x = player.x , y = player.y ,
+                 map = {x = 1 , y = 2} },
+        map = {x = 1 , y = 1}
  })
 end
  
